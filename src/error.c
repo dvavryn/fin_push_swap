@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:13:52 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:18:24 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/25 21:12:14 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	errorcheck_sub2(char **arr);
 
 void	error_exit(void)
 {
-	write(2, "ERROR\n", 6);
+	write(2, "Error\n", 6);
 	exit(1);
 }
 

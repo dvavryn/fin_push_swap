@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:49:57 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:34:25 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/25 20:40:14 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static t_data	*convert(int argc, char **arr)
 	size_t	i;
 	bool	fail;
 
-	
 	init_stack(&out, arr[0]);
 	if (out == NULL)
 	{
@@ -51,13 +50,12 @@ static t_data	*convert(int argc, char **arr)
 		error_exit();
 	}
 	ptr = out;
-	i = 1;
-	while (arr[i])
+	i = 0;
+	while (arr[++i])
 	{
 		append(&ptr, arr[i]);
 		if (ptr == NULL)
 			fail = true;
-		i++;
 	}
 	if (argc == 2)
 		free_arr(arr);
