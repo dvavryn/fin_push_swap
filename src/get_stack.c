@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:49:57 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/25 20:40:14 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/26 19:15:35 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ t_data	*get_stack(int argc, char **argv)
 	if (argc < 2)
 		error_exit();
 	if (argc == 2)
+	{
+		if (argv[1][0] == 0 || isempty(argv[1]))
+			error_exit();
 		arr = ps_split(argv[1]);
+	}
 	else
 		arr = argv + 1;
 	errorcheck(argc, arr);

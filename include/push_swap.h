@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 13:26:05 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:05:27 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/26 19:17:43 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ size_t	get_size(t_data *stack);
 int		hardcode_sort_three(t_data **stack_a);
 void	hardcode_sort_two(t_data **stack_a);
 void	bubble_sort(int *arr, size_t n);
+int		isempty(char *arg);
 
 #endif

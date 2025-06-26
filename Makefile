@@ -1,36 +1,39 @@
-NAME	:=	push_swap
+NAME	:= push_swap
 
 CC		:= cc
 
 CFLAGS	:= -Wall -Wextra -Werror
 
-SRCS	:=	src/error.c \
-			src/ex_op.c \
-			src/free.c \
-			src/get_stack.c \
-			src/main.c \
-			src/operations.c \
-			src/sort_utils.c \
-			src/sort.c \
-			libft/libft.a
+SRCS	:=	\
+		./src/error.c \
+		./src/ex_op.c \
+		./src/free.c \
+		./src/get_stack.c \
+		./src/isempty.c \
+		./src/main.c \
+		./src/operations.c \
+		./src/sort_utils.c \
+		./src/sort.c \
 
+OBJS	:= $(SRCS:.c=.o)
 
-$(NAME):
-	@make -s -C libft
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME) -g
+$(NAME)	: $(OBJS)
+	@make -C libft
+	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
 
-all: $(NAME)
-	@echo "Make all"
+all		: $(NAME)
 
-clean:
-	@echo "Make clean"
-	@make clean -s -C libft
+%.o		: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-fclean: clean
-	@echo "Make fclean"
+clean	:
+	@make clean -C libft
+	@rm -f $(OBJS)
+
+fclean	: clean
+	@make fclean -C libft
 	@rm -f $(NAME)
-	@make fclean -s -C libft
 
-re:	fclean all
+re		: fclean all
 
 .PHONY: all clean fclean re
