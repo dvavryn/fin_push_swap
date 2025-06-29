@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:53:14 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:05:08 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/29 02:15:31 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	rrotate_(char c, t_data **stack_a, t_data **stack_b)
 	}
 	else if (c == 'b' && *stack_b)
 	{
-		if ((*stack_b)->next)
+		if (!(*stack_b)->next)
 			return ;
 		revrotate(stack_b);
 		ft_printf("rrb\n");

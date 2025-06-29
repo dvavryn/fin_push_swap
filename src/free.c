@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:16:11 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:35:19 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/29 02:32:35 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,21 @@ void	free_arr(char **arr)
 	arr = NULL;
 }
 
-void	free_data(t_data *top)
+void	free_data(t_data **top)
 {
-	if (!top)
+	t_data	*cur;
+	t_data	*next;
+
+	if (!top || !*top)
 		return ;
-	while (top->next)
+	cur = *top;
+	while (cur)
 	{
-		top = top->next;
-		free(top->prev);
+		next = cur->next;
+		if (next)
+			next->prev = NULL;
+		free(cur);
+		cur = next;
 	}
-	free(top);
+	*top = NULL;
 }

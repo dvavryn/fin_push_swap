@@ -97,3 +97,5 @@ echo ERROR:
 ./push_swap "1 2 4 3" 76 90 "348 05"
 ./push_swap "  "
 ./push_swap ""
+./push_swap -
+./push_swap +

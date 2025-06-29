@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils1.c                                      :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:02:11 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:06:48 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/29 02:33:18 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	hardcode_sort_two(t_data **stack_a)
 {
 	if ((*stack_a)->value > (*stack_a)->next->value)
 		swap_('a', stack_a, NULL);
+	free_data(stack_a);
+	exit(0);
 }
 
 void	bubble_sort(int *arr, size_t n)

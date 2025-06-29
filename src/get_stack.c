@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:49:57 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/26 19:15:35 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/29 02:40:32 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 static char		**ps_split(char *arg);
 static t_data	*convert(int argc, char **arr);
-static void		init_stack(t_data **head, char *s);
-static void		append(t_data **ptr, char *s);
+static bool		init_stack(t_data **head, char *s);
+static bool		append(t_data **ptr, char *s);
 
 t_data	*get_stack(int argc, char **argv)
 {
 	char	**arr;
 	t_data	*out;
 
+	arr = NULL;
 	if (argc < 2)
 		error_exit();
 	if (argc == 2)
 	{
-		if (argv[1][0] == 0 || isempty(argv[1]))
+		if (argv[1][0] == 0 || isempty(argv[1]) || argv[1][1] == 0)
 			error_exit();
 		arr = ps_split(argv[1]);
 	}
@@ -44,10 +45,8 @@ static t_data	*convert(int argc, char **arr)
 	t_data	*out;
 	t_data	*ptr;
 	size_t	i;
-	bool	fail;
 
-	init_stack(&out, arr[0]);
-	if (out == NULL)
+	if (!init_stack(&out, arr[0]))
 	{
 		if (argc == 2)
 			free_arr(arr);
@@ -57,31 +56,27 @@ static t_data	*convert(int argc, char **arr)
 	i = 0;
 	while (arr[++i])
 	{
-		append(&ptr, arr[i]);
-		if (ptr == NULL)
-			fail = true;
+		if (!append(&ptr, arr[i]))
+		{
+			free_data(&out);
+			if (argc == 2)
+				free_arr(arr);
+			error_exit();
+		}
 	}
 	if (argc == 2)
 		free_arr(arr);
-	if (fail)
-		return (free_data(out), error_exit(), NULL);
 	return (out);
 }
 
-static void	append(t_data **ptr, char *s)
+static bool	append(t_data **ptr, char *s)
 {
 	t_data		*node;
 	static int	i = 1;
 
 	node = malloc(sizeof(t_data));
 	if (!node)
-	{
-		while ((*ptr)->prev)
-			*ptr = (*ptr)->prev;
-		free_data(*ptr);
-		ptr = NULL;
-		return ;
-	}
+		return (false);
 	node->index = i;
 	node->value = ft_atoi(s);
 	node->prev = *ptr;
@@ -89,23 +84,22 @@ static void	append(t_data **ptr, char *s)
 	(*ptr)->next = node;
 	*ptr = node;
 	i++;
+	return (true);
 }
 
-void	init_stack(t_data **head, char *s)
+static bool	init_stack(t_data **head, char *s)
 {
 	t_data	*node;
 
 	node = malloc(sizeof(t_data));
 	if (!node)
-	{
-		*head = NULL;
-		return ;
-	}
+		return (false);
 	node->index = 0;
 	node->value = ft_atoi(s);
 	node->prev = NULL;
 	node->next = NULL;
 	*head = node;
+	return (true);
 }
 
 static char	**ps_split(char *arg)

@@ -19,12 +19,12 @@ OBJS	:= $(SRCS:.c=.o)
 
 $(NAME)	: $(OBJS)
 	@make -C libft
-	$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L./libft -lft -o $(NAME) -g
 
 all		: $(NAME)
 
 %.o		: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -g
 
 clean	:
 	@make clean -C libft

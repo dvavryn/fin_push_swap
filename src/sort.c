@@ -6,7 +6,7 @@
 /*   By: dvavryn <dvavryn@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 22:02:09 by dvavryn           #+#    #+#             */
-/*   Updated: 2025/06/24 01:05:19 by dvavryn          ###   ########.fr       */
+/*   Updated: 2025/06/29 02:38:17 by dvavryn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	normalize_stack(t_data *stack, size_t size)
 
 	values = malloc(size * sizeof(int));
 	if (!values)
+	{
+		free_data(&stack);
 		error_exit();
+	}
 	node = stack;
 	i = 0;
 	while (node)
@@ -94,22 +97,30 @@ static void	radix_sort_stack(t_data **a, t_data **b, size_t size)
 	}
 }
 
-void	sort(t_data *a)
+void	sort(t_data *a, size_t size)
 {
 	t_data	*b;
-	size_t	size;
 
 	b = NULL;
-	size = get_size(a);
 	if (size <= 1 || issorted(a))
 		return ;
 	if (size == 2)
+	{
 		hardcode_sort_two(&a);
+		free_data(&a);
+		exit(0);
+	}
 	else if (size == 3)
+	{
 		hardcode_sort_three(&a);
+		free_data(&a);
+		exit(0);
+	}
 	else
 	{
 		normalize_stack(a, size);
 		radix_sort_stack(&a, &b, size);
+		free_data(&a);
+		exit(0);
 	}
 }
